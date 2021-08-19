@@ -13,7 +13,7 @@ This project is an example of how to write a meele combat system by using raycas
 
 - [Controls](#controls)
 - [Animation Driven Hitbox and Events](#animation-driven-hitbox-and-events)
-- [Attack Phase](#attack-phase)
+- [AttackPhase](#attackphase)
 
 ## Controls
 
@@ -51,9 +51,119 @@ the `PlayerController` script when:
 
 This is how all attack animations are configured.
 
-## Attack Phase
+## AttackPhase
 
+All attacks are divided in one or multiple phases:
 
+```csharp
+/// <summary>Represent a phase of the current attack</summary>
+/// <remarks>Allow to keep track of entities already hit</remarks>
+public class AttackPhase
+{
+    /// <summary>Entity who attacked</summary>
+    public IEntity source;
+    /// <summary>Id of the attack</summarry>
+    public EAttackId attackId;
+    /// <summary>List of entities hit by the attack</summary>
+    public List<IEntity> targets = new List<IEntity>();
+}
+```
+
+Phases are driven by animation events handled in the `PlayerController` script:
+
+```csharp
+/// <summary>Player controller for handling inputs and physics</summary>
+public class PlayerController : MonoBehaviour, IEntity
+{
+    ...
+ 
+    [SerializeField]
+    private AttackHitBox _attackHitBox;
+    /// <summary>Current attack phase</summary>
+    private AttackPhase _attackPhase;
+
+    ...
+
+    /// <summary>Called by animation when a new phase of attack begins</summary>
+    private void OnAttackPhaseBegin()
+    {
+        // Create a new phase
+        _attackPhase = new AttackPhase();
+        _attackPhase.source = this;
+
+        // Activate the hitbox
+        _attackHitBox.attackPhase = _attackPhase;
+        _attackHitBox.gameObject.SetActive(true);
+    }
+
+    /// <summary>Called by animation when the current phase of attack ends</summary>
+    private void OnAttackPhaseEnd()
+    {
+        CancelAttackPhase();
+    }
+    
+    ...
+}
+```
+
+This is the hitbox that checks collisions with entities during attack phases:
+
+```csharp
+/// <summary>Represent an attack hitbox that can hit other entities</summary>
+/// <remarks>This is done by using Physics2D.OverlapCircleAll in Update</remarks>
+public class AttackHitBox : MonoBehaviour
+{
+    /// <summmary>Hitbox radius</summary>
+    /// <remarks>Driven by animation</remarks>
+    [SerializeField]
+    private float _radius;
+    /// <summmary>Layer to hit</summary>
+    [SerializeField]
+    private LayerMask _layerMask;
+    /// <summary>Current attack phase</summary>
+    /// <remarks>Prevent hitting the same entity multiple times</remarks>
+    [HideInInspector]
+    public AttackPhase attackPhase;
+
+    private void Update()
+    {
+        // Only hit during attack phases
+        if (attackPhase == null)
+        {
+            return;
+        }
+
+        // Search for colliding entities
+        Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, _radius, _layerMask);
+        foreach (var hitCollider in hitColliders)
+        {
+            // IEntity allows to get any entity
+            var entity = hitCollider.gameObject.GetComponent<IEntity>();
+            if (entity == null || entity == attackPhase.source)
+            {
+                continue;
+            }
+
+            // Entity already hit by this attack
+            if (attackPhase.targets.Contains(entity))
+            {
+                continue;
+            }
+
+            attackPhase.targets.Add(entity);
+
+            // Notify entity
+            var collision = new AttackCollision();
+            collision.position = transform.position;
+            entity.OnHitBy(attackPhase, collision);
+        }
+    }
+
+    ...
+}
+```
+
+Each phase can only hit the same entity once, but a single attack can have multiple phases as demonstrated with the heavy punch.
 
 ## Credits
 
