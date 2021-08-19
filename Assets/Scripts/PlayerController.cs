@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 namespace Game
 {
+    /// <summary>Player controller for handling inputs and physics</summary>
     public class PlayerController : MonoBehaviour, IEntity
     {
         [SerializeField]
