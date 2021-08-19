@@ -16,7 +16,7 @@ This project is an example of how to write a meele combat system by using raycas
 
 Sprites are coming from [The Spriters Resource](https://www.spriters-resource.com/).
 
-Font from [dafont](https://www.fontspace.com/atlantis-international-font-f31357).
+Font from [dafont](https://www.dafont.com/fr/great-fighter.font).
 
 ## License
 
