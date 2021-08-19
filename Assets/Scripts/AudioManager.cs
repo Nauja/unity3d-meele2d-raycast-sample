@@ -42,6 +42,7 @@ namespace Game
             {
                 if (_.attackId == attackId)
                 {
+                    _.audio.pitch = UnityEngine.Random.Range(0.8f, 1.0f);
                     _.audio.Play();
                     break;
                 }

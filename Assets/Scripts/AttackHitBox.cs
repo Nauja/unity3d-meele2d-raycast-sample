@@ -4,8 +4,8 @@ using UnityEngine;
 
 namespace Game
 {
-    /// <summary>Handle collisions between the attack hitbox and entities</summary>
-    /// <remarks>Must be added on the collider</remarks>
+    /// <summary>Represent an attack hitbox that can hit other entities</summary>
+    /// <remarks>This is done by using Physics2D.OverlapCircleAll in Update</remarks>
     public class AttackHitBox : MonoBehaviour
     {
         /// <summmary>Hitbox radius</summary>
@@ -16,6 +16,7 @@ namespace Game
         [SerializeField]
         private LayerMask _layerMask;
         /// <summary>Current attack phase</summary>
+        /// <remarks>Prevent hitting the same entity multiple times</remarks>
         [HideInInspector]
         public AttackPhase attackPhase;
 
@@ -56,7 +57,7 @@ namespace Game
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.red;
-            Gizmos.DrawSphere(transform.position, _radius);
+            Gizmos.DrawWireSphere(transform.position, _radius);
         }
     }
 }

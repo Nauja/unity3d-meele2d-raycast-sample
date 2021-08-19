@@ -12,7 +12,7 @@ namespace Game
         HighPunch
     }
 
-    /// <summary>Represent a collision between an entity and an attack</summary>
+    /// <summary>Represent collision between an entity and an attack</summary>
     public class AttackCollision
     {
         /// <summary>Hit point</summary>
@@ -20,7 +20,7 @@ namespace Game
     }
 
     /// <summary>Represent a phase of the current attack</summary>
-    /// <remarks>This is used to trigger hits a single time</remarks>
+    /// <remarks>Allow to keep track of entities already hit</remarks>
     public class AttackPhase
     {
         /// <summary>Entity who attacked</summary>
