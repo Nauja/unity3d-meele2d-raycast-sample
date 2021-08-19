@@ -10,3 +10,14 @@ Sample of a meele combat system done with raycasts.
 This project is an example of how to write a meele combat system by using raycasts such as `Physics2D.OverlapCircle` to detect attack collisions.
 
 ## Table of contents:
+
+
+## Credits
+
+Sprites are coming from [The Spriters Resource](https://www.spriters-resource.com/).
+
+Font from [dafont](https://www.fontspace.com/atlantis-international-font-f31357).
+
+## License
+
+Licensed under the [MIT](LICENSE) License.
