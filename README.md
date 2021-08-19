@@ -11,6 +11,18 @@ This project is an example of how to write a meele combat system by using raycas
 
 ## Table of contents:
 
+- [Controls](#controls)
+
+## Controls
+
+Check `Assets/Controls.inputactions` for the full list of controls available:
+
+![Controls](https://github.com/Nauja/unity3d-meele2d-raycast-sample/raw/media/controls.png)
+
+  * Left/Right arrow or Left analog stick: Move
+  * Space or Bottom button: Punch
+  * E or Left button: Kick
+  * Ctrl or Up button: High punch
 
 ## Credits
 
