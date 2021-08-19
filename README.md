@@ -22,9 +22,9 @@ Check `Assets/Controls.inputactions` for the full list of controls available:
 ![Controls](https://github.com/Nauja/unity3d-meele2d-raycast-sample/raw/media/controls.png)
 
   * Left/Right arrow or Left analog stick: Move
-  * Space or Bottom button: Punch
-  * E or Left button: Kick
-  * Ctrl or Up button: High punch
+  * Space or Bottom button: Punch, a light attack that hits one time
+  * E or Left button: Kick, a light attack that hits one time
+  * Ctrl or Up button: High punch, an heavy attack that hits three times
 
 ## Animation Driven Hitbox and Events
 
