@@ -7,7 +7,7 @@ Sample of a meele combat system done with raycasts.
 
 ![Preview](https://github.com/Nauja/unity3d-meele2d-raycast-sample/raw/media/preview.gif)
 
-This project is an example of how to write a meele combat system by using raycasts such as `Physics2D.OverlapCircle` to detect attack collisions.
+This project is an example of how to write a meele combat system by using raycasts such as `Physics2D.OverlapCircle` to detect attack collisions and even allow a single attack to hit multiple times.
 
 ## Table of contents:
 
